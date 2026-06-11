@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>QuantumSparkCreative — The thing your audiologist won't tell you</title>
+<meta name="description" content="Hearing loss life coaching with Korey Bogle. 30 years of lived experience. Story mapping sessions, group cohorts, and corporate accessibility consulting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,700&family=Inter:wght@300;400;500;600&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#070708;
+  --ink2:#0C0F0D;
+  --parch:#F0EAD6;
+  --green:#2D6A4F;
+  --green-deep:#1E4A37;
+  --sage:#95B8A8;
+  --amber:#E8C547;
+  --brown:#3D3530;
+  --muted:#7A8C85;
+  --border:rgba(45,106,79,.18);
+  --line:rgba(149,184,168,.12);
+  --display:"Fraunces",Georgia,serif;
+  --body:"Inter",sans-serif;
+  --mono:"Courier Prime",monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--parch);font-family:var(--body);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+::selection{background:rgba(45,106,79,.4);color:var(--parch);}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+  *{animation:none!important;transition:none!important;}
+}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,7,8,.85);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:border-color .3s;}
+nav.scrolled{border-bottom-color:var(--line);}
+.logo{font-family:var(--display);font-size:1.05rem;font-weight:600;letter-spacing:.01em;text-decoration:none;color:var(--parch);}
+.logo em{font-style:italic;color:var(--sage);font-weight:400;}
+.nav-links{display:flex;align-items:center;gap:26px;}
+.nav-links a{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--parch);}
+.nav-book{background:var(--green)!important;color:var(--parch)!important;padding:10px 20px;border-radius:100px;font-weight:700!important;transition:background .2s!important;}
+.nav-book:hover{background:var(--green-deep)!important;}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 0 64px;position:relative;overflow:hidden;}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 800px 500px at 70% 30%,rgba(45,106,79,.1) 0%,transparent 60%);pointer-events:none;}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;position:relative;z-index:1;}
+.kicker{font-family:var(--mono);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--sage);margin-bottom:22px;display:flex;align-items:center;gap:12px;}
+.kicker::before{content:'';width:32px;height:1px;background:var(--sage);}
+.hero h1{font-family:var(--display);font-size:clamp(2.6rem,5.6vw,4.6rem);font-weight:600;line-height:1.02;letter-spacing:-.025em;margin-bottom:22px;}
+.hero h1 em{font-style:italic;color:var(--sage);font-weight:300;}
+.hero-sub{font-size:1.02rem;color:rgba(240,234,214,.66);line-height:1.8;max-width:480px;margin-bottom:34px;}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:17px 30px;border-radius:100px;text-decoration:none;border:none;cursor:pointer;transition:all .2s;min-height:52px;}
+.btn-green{background:var(--green);color:var(--parch);}
+.btn-green:hover{background:var(--green-deep);transform:translateY(-1px);}
+.btn-line{background:transparent;color:var(--parch);border:1px solid rgba(240,234,214,.22);}
+.btn-line:hover{border-color:rgba(240,234,214,.55);}
+.btn-amber{background:var(--amber);color:var(--brown);}
+.btn-amber:hover{filter:brightness(1.07);}
+
+/* ── SIGNATURE: THE WAVEFORM WIDGET ── */
+.wave-widget{background:linear-gradient(160deg,rgba(45,106,79,.1) 0%,rgba(12,15,13,.6) 100%);border:1px solid var(--border);border-radius:20px;padding:30px;position:relative;overflow:hidden;}
+.ww-q{font-family:var(--display);font-size:1.25rem;font-style:italic;font-weight:400;line-height:1.35;margin-bottom:6px;}
+.ww-hint{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;}
+.ww-canvas{width:100%;height:90px;display:block;margin-bottom:8px;}
+.ww-readout{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:18px;}
+.ww-years{font-family:var(--display);font-size:3.6rem;font-weight:700;color:var(--amber);line-height:1;transition:color .3s;}
+.ww-unit{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;background:rgba(149,184,168,.18);border-radius:2px;outline:none;margin-bottom:18px;cursor:pointer;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--green);border:2px solid var(--sage);cursor:grab;box-shadow:0 2px 12px rgba(45,106,79,.5);}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--green);border:2px solid var(--sage);cursor:grab;}
+.ww-msg{font-family:var(--display);font-style:italic;font-size:.95rem;color:var(--sage);line-height:1.6;text-align:center;min-height:54px;transition:opacity .25s;}
+.ww-foot{display:flex;align-items:center;gap:12px;padding-top:18px;margin-top:6px;border-top:1px solid var(--line);}
+.ww-ava{width:40px;height:40px;border-radius:50%;background:rgba(45,106,79,.18);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.66rem;color:var(--sage);flex-shrink:0;}
+.ww-foot-text{font-size:.76rem;color:rgba(240,234,214,.55);line-height:1.5;}
+.ww-foot-text strong{color:var(--parch);}
+
+/* ── STAT BAND ── */
+.stat-band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:72px;}
+.stat-flex{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{padding:26px 18px;text-align:center;border-right:1px solid var(--line);}
+.stat:last-child{border-right:none;}
+.stat-val{font-family:var(--display);font-size:1.9rem;font-weight:700;color:var(--amber);line-height:1;display:block;margin-bottom:5px;}
+.stat-key{font-family:var(--mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+
+/* ── SECTION SCAFFOLD ── */
+section{padding:104px 0;}
+.eyebrow{font-family:var(--mono);font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.eyebrow::before{content:'';width:24px;height:1px;background:currentColor;opacity:.6;}
+h2.title{font-family:var(--display);font-size:clamp(2rem,4.4vw,3.3rem);font-weight:600;line-height:1.05;letter-spacing:-.02em;margin-bottom:14px;}
+h2.title em{font-style:italic;font-weight:300;color:var(--sage);}
+.lede{font-size:.94rem;color:rgba(240,234,214,.55);max-width:560px;line-height:1.8;margin-bottom:52px;}
+
+/* ── STORY (parchment) ── */
+.story{background:var(--parch);color:var(--brown);position:relative;}
+.story::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--green),transparent);}
+.story .eyebrow{color:var(--green);}
+.story h2.title{color:var(--brown);}
+.story h2.title em{color:var(--green);}
+.story-cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;max-width:920px;}
+.story-text{font-size:.96rem;color:#4A5550;line-height:1.9;}
+.story-text p{margin-bottom:18px;}
+.story-text strong{color:var(--brown);font-weight:600;}
+.story-quote{font-family:var(--display);font-size:1.55rem;font-style:italic;font-weight:300;color:var(--green);line-height:1.45;align-self:center;padding-left:28px;border-left:3px solid var(--green);}
+.story-sig{font-family:var(--display);font-style:italic;font-size:1.05rem;color:var(--green);margin-top:8px;}
+
+/* ── WHO ── */
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.who-card{background:rgba(45,106,79,.06);border:1px solid var(--border);border-radius:16px;padding:26px;cursor:pointer;transition:transform .25s,border-color .25s,background .25s;}
+.who-card:hover{transform:translateY(-4px);border-color:var(--sage);background:rgba(45,106,79,.11);}
+.who-ico{font-size:1.5rem;margin-bottom:14px;display:block;}
+.who-t{font-family:var(--display);font-size:1.08rem;font-weight:600;margin-bottom:8px;}
+.who-b{font-size:.83rem;color:rgba(240,234,214,.58);line-height:1.65;}
+
+/* ── OFFERS ── */
+.offers{background:linear-gradient(180deg,var(--ink) 0%,var(--ink2) 100%);}
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start;}
+.tier{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;position:relative;cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s;}
+.tier:hover{transform:translateY(-5px);border-color:var(--border);}
+.tier.feat{border-color:var(--green);box-shadow:0 0 0 1px var(--green),0 28px 72px rgba(45,106,79,.16);}
+.tier.core{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber),0 28px 72px rgba(232,197,71,.1);}
+.badge{position:absolute;top:18px;right:18px;font-family:var(--mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:4px 11px;border-radius:100px;font-weight:700;}
+.badge-g{background:var(--green);color:var(--parch);}
+.badge-a{background:var(--amber);color:var(--brown);}
+.t-head{padding:28px 26px 20px;}
+.t-tier{font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:10px;}
+.t-name{font-family:var(--display);font-size:1.45rem;font-weight:600;line-height:1.1;margin-bottom:8px;}
+.t-hook{font-family:var(--display);font-style:italic;font-weight:300;font-size:.9rem;color:rgba(240,234,214,.5);line-height:1.55;margin-bottom:18px;min-height:44px;}
+.t-price-row{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+.t-price{font-family:var(--display);font-size:2.5rem;font-weight:700;color:var(--amber);line-height:1;}
+.t-per{font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;color:var(--muted);}
+.t-strike{font-family:var(--mono);font-size:.66rem;color:var(--muted);text-decoration:line-through;opacity:.55;}
+.t-pill{font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(232,197,71,.1);border:1px solid rgba(232,197,71,.25);color:var(--amber);padding:3px 9px;border-radius:100px;}
+.t-note{font-size:.74rem;color:rgba(240,234,214,.35);margin-top:5px;}
+.t-line{height:1px;background:rgba(255,255,255,.06);margin:0 26px;}
+.t-list{padding:20px 26px 22px;display:flex;flex-direction:column;gap:10px;}
+.t-item{display:flex;gap:11px;align-items:flex-start;font-size:.83rem;color:rgba(240,234,214,.74);line-height:1.55;}
+.t-ch{color:var(--sage);flex-shrink:0;padding-top:1px;}
+.t-item strong{color:var(--parch);font-weight:600;}
+.t-shield{background:rgba(45,106,79,.09);border:1px solid rgba(45,106,79,.22);border-radius:9px;padding:11px 13px;display:flex;gap:9px;align-items:flex-start;font-size:.77rem;color:rgba(240,234,214,.6);line-height:1.55;margin-top:2px;}
+.t-shield strong{color:var(--sage);}
+.t-scarce{background:rgba(232,197,71,.06);border:1px solid rgba(232,197,71,.18);border-radius:9px;padding:10px 13px;display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-top:2px;}
+.t-cta{display:flex;align-items:center;justify-content:center;margin:0 26px 26px;padding:14px;border-radius:100px;text-decoration:none;font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;min-height:48px;transition:all .2s;}
+.tc-green{background:var(--green);color:var(--parch);}
+.tc-green:hover{background:var(--green-deep);}
+.tc-line{background:transparent;color:var(--parch);border:1px solid rgba(240,234,214,.2);}
+.tc-line:hover{border-color:rgba(240,234,214,.5);}
+.tc-amber{background:var(--amber);color:var(--brown);}
+.tc-amber:hover{filter:brightness(1.07);}
+
+/* ── COHORT ── */
+.cohort{background:var(--parch);color:var(--brown);}
+.cohort .eyebrow{color:var(--green);}
+.cohort h2.title{color:var(--brown);}
+.cohort h2.title em{color:var(--green);}
+.cohort .lede{color:#6A7C76;}
+.flow{max-width:760px;}
+.flow-row{display:grid;grid-template-columns:96px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid rgba(45,106,79,.12);}
+.flow-row:last-child{border-bottom:none;}
+.fl-when{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:700;padding-top:4px;}
+.fl-t{font-family:var(--display);font-size:1.08rem;font-weight:600;color:var(--brown);margin-bottom:5px;}
+.fl-b{font-size:.86rem;color:#6A7C76;line-height:1.7;}
+.cohort-math{background:white;border:1px solid rgba(45,106,79,.16);border-radius:16px;padding:8px;margin-top:36px;display:grid;grid-template-columns:repeat(4,1fr);}
+.cm{padding:20px 14px;text-align:center;border-right:1px solid rgba(45,106,79,.1);}
+.cm:last-child{border-right:none;}
+.cm-v{font-family:var(--display);font-size:1.5rem;font-weight:700;color:var(--green);display:block;margin-bottom:3px;}
+.cm-k{font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+
+/* ── CORPORATE ── */
+.corp{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:radial-gradient(ellipse 700px 400px at 20% 50%,rgba(232,197,71,.04) 0%,transparent 60%),var(--ink);}
+.corp-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;}
+.corp .eyebrow{color:var(--amber);}
+.corp-list{display:flex;flex-direction:column;gap:12px;margin-top:26px;}
+.corp-li{display:flex;gap:13px;align-items:flex-start;font-size:.86rem;color:rgba(240,234,214,.72);line-height:1.55;}
+.corp-li span:first-child{color:var(--amber);flex-shrink:0;font-family:var(--mono);}
+.corp-card{background:var(--ink2);border:1px solid rgba(232,197,71,.22);border-radius:20px;padding:30px;}
+.cc-k{font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:18px;}
+.cc-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.cc-row:last-of-type{border-bottom:none;}
+.cc-l{font-size:.84rem;color:rgba(240,234,214,.62);}
+.cc-v{font-family:var(--mono);font-size:.8rem;color:var(--amber);white-space:nowrap;}
+.cc-v.big{color:var(--sage);font-weight:700;}
+
+/* ── FREE ── */
+.free-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.free-card{background:rgba(45,106,79,.06);border:1px solid var(--border);border-radius:16px;padding:24px;transition:transform .25s,border-color .25s;display:flex;flex-direction:column;}
+.free-card:hover{transform:translateY(-4px);border-color:var(--sage);}
+.fr-ico{font-size:1.4rem;margin-bottom:12px;}
+.fr-t{font-family:var(--display);font-size:1rem;font-weight:600;margin-bottom:6px;}
+.fr-b{font-size:.79rem;color:rgba(240,234,214,.52);line-height:1.6;margin-bottom:16px;flex:1;}
+.fr-a{font-family:var(--mono);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);text-decoration:none;}
+.fr-a:hover{color:var(--parch);}
+
+/* ── GUARANTEE ── */
+.gx{padding:88px 0;background:rgba(45,106,79,.05);border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center;}
+.gx-inner{max-width:640px;margin:0 auto;}
+.gx-ico{font-size:2.2rem;margin-bottom:16px;display:block;}
+.gx h2{font-family:var(--display);font-size:clamp(1.6rem,3.6vw,2.4rem);font-weight:600;line-height:1.15;margin-bottom:12px;}
+.gx h2 em{font-style:italic;font-weight:300;color:var(--sage);}
+.gx p{font-size:.9rem;color:rgba(240,234,214,.58);line-height:1.8;max-width:520px;margin:0 auto;}
+
+/* ── FINAL ── */
+.final{padding:130px 0;text-align:center;position:relative;overflow:hidden;}
+.final::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(45,106,79,.11) 0%,transparent 65%);pointer-events:none;}
+.final-inner{position:relative;z-index:1;max-width:620px;margin:0 auto;}
+.final h2{font-family:var(--display);font-size:clamp(2.2rem,5.4vw,4.2rem);font-weight:600;line-height:1.02;letter-spacing:-.02em;margin-bottom:16px;}
+.final h2 em{font-style:italic;font-weight:300;color:var(--sage);}
+.final p{font-size:.95rem;color:rgba(240,234,214,.55);line-height:1.8;margin-bottom:34px;}
+.final-foot{font-family:var(--mono);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(149,184,168,.35);margin-top:20px;display:block;}
+
+/* ── FOOTER ── */
+footer{padding:40px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.f-logo{font-family:var(--display);font-style:italic;font-size:.95rem;color:var(--sage);}
+.f-links{display:flex;gap:20px;flex-wrap:wrap;}
+.f-links a{font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
+.f-links a:hover{color:var(--parch);}
+.f-copy{font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(149,184,168,.26);}
+
+/* ── EXIT OVERLAY ── */
+.exit-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(7,7,8,.88);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;padding:20px;}
+.exit-overlay.show{display:flex;}
+.exit-sheet{background:#0D1410;border:1px solid rgba(45,106,79,.4);border-radius:22px 22px 0 0;padding:30px 26px 42px;width:100%;max-width:480px;animation:up .32s ease;}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+.ex-handle{width:36px;height:4px;background:rgba(255,255,255,.14);border-radius:2px;margin:0 auto 22px;}
+.ex-h{font-family:var(--display);font-size:1.4rem;font-weight:600;line-height:1.2;margin-bottom:8px;text-align:center;}
+.ex-h em{font-style:italic;font-weight:300;color:var(--sage);}
+.ex-p{font-size:.83rem;color:rgba(240,234,214,.56);text-align:center;line-height:1.65;margin-bottom:22px;}
+.ex-go{display:flex;align-items:center;justify-content:center;width:100%;padding:16px;background:var(--green);color:var(--parch);font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:100px;text-decoration:none;min-height:52px;margin-bottom:10px;}
+.ex-no{display:flex;align-items:center;justify-content:center;width:100%;padding:12px;background:transparent;color:var(--muted);font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;}
+.ex-no:hover{color:var(--parch);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:44px;}
+  .who-grid{grid-template-columns:repeat(2,1fr);}
+  .tier-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto;}
+  .story-cols{grid-template-columns:1fr;gap:32px;}
+  .corp-grid{grid-template-columns:1fr;gap:44px;}
+  .free-grid{grid-template-columns:repeat(2,1fr);}
+  .stat-flex{grid-template-columns:repeat(2,1fr);}
+  .stat:nth-child(2){border-right:none;}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line);}
+  .nav-links a:not(.nav-book){display:none;}
+}
+@media(max-width:560px){
+  .wrap{padding:0 22px;}
+  nav{padding:14px 22px;}
+  section{padding:76px 0;}
+  .hero{padding:120px 0 48px;}
+  .who-grid,.free-grid{grid-template-columns:1fr;}
+  .cohort-math{grid-template-columns:repeat(2,1fr);}
+  .cm:nth-child(2){border-right:none;}
+  .cm:nth-child(1),.cm:nth-child(2){border-bottom:1px solid rgba(45,106,79,.1);}
+  .flow-row{grid-template-columns:72px 1fr;gap:16px;}
+  footer{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="#top">Quantum<em>Spark</em>Creative</a>
+  <div class="nav-links">
+    <a href="#story">Story</a>
+    <a href="#offers">Work With Me</a>
+    <a href="#cohort">The Group</a>
+    <a href="#corporate">Corporate</a>
+    <a href="#free">Free Content</a>
+    <a href="https://cal.com/quantumsparkcreative/30-min-audit" target="_blank" rel="noopener" class="nav-book">Book a Session</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="kicker">Hearing Loss Life Coaching · Korey Bogle</p>
+        <h1>The thing your audiologist <em>won't tell you.</em></h1>
+        <p class="hero-sub">I wore hearing aids since childhood and hid them for years. I waited 7 years as an adult before getting real help. I built this practice from everything it cost me to wait that long — so you don't have to.</p>
+        <div class="cta-row">
+          <a href="https://cal.com/quantumsparkcreative/30-min-audit" target="_blank" rel="noopener" class="btn btn-green">Book a Free Discovery Call →</a>
+          <a href="#free" class="btn btn-line">Get Free Content</a>
+        </div>
+      </div>
+
+      <!-- SIGNATURE: waveform + waiting slider -->
+      <div class="wave-widget" id="wave-widget">
+        <p class="ww-q">"How long have you been waiting to get help?"</p>
+        <p class="ww-hint">Move the slider — watch what waiting does</p>
+        <canvas class="ww-canvas" id="ww-canvas" width="640" height="180" aria-hidden="true"></canvas>
+        <div class="ww-readout">
+          <span class="ww-years" id="ww-years">0</span>
+          <span class="ww-unit">years waiting</span>
+        </div>
+        <input type="range" id="ww-slider" min="0" max="15" value="0" step="1" aria-label="Years you have been waiting to get help">
+        <p class="ww-msg" id="ww-msg">Move the slider to see where you are.</p>
+        <div class="ww-foot">
+          <div class="ww-ava">KB</div>
+          <p class="ww-foot-text"><strong>Korey waited 7 years.</strong> Then he built this practice so nobody has to wait as long as he did.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAT BAND -->
+    <div class="stat-band reveal">
+      <div class="stat-flex">
+        <div class="stat"><span class="stat-val">30</span><span class="stat-key">Years lived with hearing loss</span></div>
+        <div class="stat"><span class="stat-val">7</span><span class="stat-key">Years Korey waited for help</span></div>
+        <div class="stat"><span class="stat-val">430M</span><span class="stat-key">People worldwide living this</span></div>
+        <div class="stat"><span class="stat-val">0</span><span class="stat-key">Coaches who've lived it like this</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="wrap">
+    <p class="eyebrow reveal">My Story</p>
+    <h2 class="title reveal">I was the patient<br><em>nobody could reach.</em></h2>
+    <div class="story-cols reveal">
+      <div class="story-text">
+        <p>I have been hearing impaired since I was a child. Every morning before school I took my hearing aids out and hid them. I was more afraid of being teased than of missing everything around me.</p>
+        <p>As an adult I walked into audiology offices and said "I'll think about it." Then I left. I did that for <strong>seven years</strong>. Not because the audiologists were wrong — because nobody ever met me where I actually was: scared, ashamed, and completely alone in something I didn't have the language for yet.</p>
+        <p>I built QuantumSparkCreative because I am the person who needed this and couldn't find it anywhere. Not a clinician with textbook knowledge — the actual person who lived inside it, and came out the other side with something worth sharing.</p>
+        <p class="story-sig">— Korey Bogle</p>
+      </div>
+      <div class="story-quote">"Hearing loss is not just a clinical problem. It is a relationship problem. A confidence problem. An identity problem. And none of that gets addressed in a 45-minute appointment."</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section id="who">
+  <div class="wrap">
+    <p class="eyebrow reveal">Who This Is For</p>
+    <h2 class="title reveal">You're in the right place<br><em>if any of this is familiar.</em></h2>
+    <p class="lede reveal">I don't coach audiologists. I coach the people living what I lived — at every stage of the journey.</p>
+    <div class="who-grid">
+      <div class="who-card reveal"><span class="who-ico">😶</span><div class="who-t">You're hiding it</div><div class="who-b">Nodding along. Turning up the TV. Smiling at jokes you didn't hear. Exhausted from performing "fine" every single day.</div></div>
+      <div class="who-card reveal"><span class="who-ico">😟</span><div class="who-t">You just got diagnosed</div><div class="who-b">The audiologist gave you information. Nobody gave you a way to process what it means for your life, your relationships, your future.</div></div>
+      <div class="who-card reveal"><span class="who-ico">🎧</span><div class="who-t">Your aids are in the drawer</div><div class="who-b">You spent the money. The devices sit untouched. You say they don't work well enough — but the real reason is something else.</div></div>
+      <div class="who-card reveal"><span class="who-ico">💔</span><div class="who-t">It's affecting your relationships</div><div class="who-b">Dinners are hard. Phone calls harder. Your partner is frustrated. Your kids speak louder around you. You're disappearing from your own life.</div></div>
+      <div class="who-card reveal"><span class="who-ico">💼</span><div class="who-t">It's costing you at work</div><div class="who-b">Meetings are exhausting. You've stopped contributing in groups because following the conversation takes everything you have.</div></div>
+      <div class="who-card reveal"><span class="who-ico">✊🏾</span><div class="who-t">Nobody looks like you in this space</div><div class="who-b">Black men especially carry this alone — because the culture says be strong. I lived that too. Strength is getting the help you need.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section class="offers" id="offers">
+  <div class="wrap">
+    <p class="eyebrow reveal">Work With Me</p>
+    <h2 class="title reveal">Three ways in.<br><em>One destination.</em></h2>
+    <p class="lede reveal">Every path leads to the same place — fully present in your own life. Start wherever feels right for where you are today.</p>
+    <div class="tier-grid">
+
+      <!-- PLAYBOOK -->
+      <div class="tier reveal" data-href="https://koreyconsult.gumroad.com/l/jwlqia">
+        <div class="t-head">
+          <p class="t-tier">Entry · Self-Guided</p>
+          <h3 class="t-name">The Hearing Life Playbook</h3>
+          <p class="t-hook">"I'm not ready to talk yet — but I'm ready to understand."</p>
+          <div class="t-price-row">
+            <span class="t-price">$37</span>
+            <span class="t-strike">$97</span>
+            <span class="t-pill">Launch Price</span>
+          </div>
+          <p class="t-note">Instant download · Yours forever</p>
+        </div>
+        <div class="t-line"></div>
+        <div class="t-list">
+          <div class="t-item"><span class="t-ch">✓</span><span>The 7 stages of hearing loss — where you are and what's next</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span>Teen chapter written directly to teenagers hiding their aids</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span>Conversation scripts for partner, parents, boss, children</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span>10-question audiologist checklist — print and bring</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span>30-day action plan from awareness to your first appointment</span></div>
+        </div>
+        <a href="https://koreyconsult.gumroad.com/l/jwlqia" target="_blank" rel="noopener" class="t-cta tc-line">Get the Playbook — $37 →</a>
+      </div>
+
+      <!-- SESSION -->
+      <div class="tier feat reveal" data-href="https://cal.com/quantumsparkcreative/30-min-audit">
+        <span class="badge badge-g">Most Chosen</span>
+        <div class="t-head">
+          <p class="t-tier">First Offer · 1:1 Session</p>
+          <h3 class="t-name">Story Mapping Session</h3>
+          <p class="t-hook">"Let's figure out where you actually are — and what's really going on."</p>
+          <div class="t-price-row">
+            <span class="t-price">$197</span>
+            <span class="t-per">single session · 60 min</span>
+          </div>
+          <p class="t-note">Money-back guarantee · Recording included</p>
+        </div>
+        <div class="t-line"></div>
+        <div class="t-list">
+          <div class="t-item"><span class="t-ch">✓</span><span><strong>60-minute story mapping call</strong> — we map where you are in the 7 stages and why you're stuck there</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span>Audiogram review in plain English, if you have one</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span><strong>Written next-step plan</strong> delivered within 24 hours</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span>Session recording — share with family or revisit anytime</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span>The Hearing Life Playbook included free</span></div>
+          <div class="t-shield"><span>🛡️</span><span>If you don't leave with real clarity — <strong>full refund, no questions.</strong></span></div>
+        </div>
+        <a href="https://cal.com/quantumsparkcreative/30-min-audit" target="_blank" rel="noopener" class="t-cta tc-green">Book My Story Mapping Session →</a>
+      </div>
+
+      <!-- COHORT -->
+      <div class="tier core reveal" data-href="https://cal.com/quantumsparkcreative/30-min-audit">
+        <span class="badge badge-a">Core Offer</span>
+        <div class="t-head">
+          <p class="t-tier">Core · Group Cohort</p>
+          <h3 class="t-name">The Hearing Life Group</h3>
+          <p class="t-hook">"8–12 people at the same stage, moving through it together — weekly."</p>
+          <div class="t-price-row">
+            <span class="t-price">$497</span>
+            <span class="t-per">/month · or $4,500/year</span>
+          </div>
+          <p class="t-note">8–12 people per cohort · Meets weekly</p>
+        </div>
+        <div class="t-line"></div>
+        <div class="t-list">
+          <div class="t-item"><span class="t-ch">✓</span><span><strong>Weekly 60-min group session</strong> with Korey — same people, same stage of journey</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span>Matched by stage — not a generic support group</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span>Private community channel between sessions</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span><strong>Monthly 1:1 check-in</strong> with Korey included</span></div>
+          <div class="t-item"><span class="t-ch">✓</span><span>All session recordings + playbook + app access</span></div>
+          <div class="t-scarce"><span>⏳</span><span>8–12 max per cohort · Next cohort forming now</span></div>
+        </div>
+        <a href="https://cal.com/quantumsparkcreative/30-min-audit" target="_blank" rel="noopener" class="t-cta tc-amber">Apply for the Next Cohort →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COHORT EXPLAINER -->
+<section class="cohort" id="cohort">
+  <div class="wrap">
+    <p class="eyebrow reveal">How the Group Works</p>
+    <h2 class="title reveal">You don't heal in isolation.<br><em>You heal in community.</em></h2>
+    <p class="lede reveal">The cohort is different from 1:1 coaching in one critical way — you are surrounded by people living exactly what you are living, right now. That changes everything.</p>
+    <div class="flow reveal">
+      <div class="flow-row">
+        <div class="fl-when">Week 1</div>
+        <div><div class="fl-t">The honest audit</div><div class="fl-b">Every person shares where they actually are. No performance. No "I'm fine." Just the truth — in a room where everyone else is holding the same truth.</div></div>
+      </div>
+      <div class="flow-row">
+        <div class="fl-when">Weeks 2–4</div>
+        <div><div class="fl-t">The work — shame, relationships, identity</div><div class="fl-b">We move through the stages together. The hiding. The conversations that need to happen. Korey leads; the group holds each other accountable in ways 1:1 coaching cannot replicate.</div></div>
+      </div>
+      <div class="flow-row">
+        <div class="fl-when">Weeks 5–8</div>
+        <div><div class="fl-t">Treatment, adjustment, what's next</div><div class="fl-b">Members starting treatment walk through the adjustment period together. Those not yet there build the roadmap together. Nobody is left behind.</div></div>
+      </div>
+      <div class="flow-row">
+        <div class="fl-when">Ongoing</div>
+        <div><div class="fl-t">You stay as long as you need</div><div class="fl-b">Month-to-month. No fixed end date. Members through the hardest part often stay to support newer members — which accelerates their own healing.</div></div>
+      </div>
+    </div>
+    <div class="cohort-math reveal">
+      <div class="cm"><span class="cm-v">8–12</span><span class="cm-k">People per cohort</span></div>
+      <div class="cm"><span class="cm-v">1/week</span><span class="cm-k">Group session with Korey</span></div>
+      <div class="cm"><span class="cm-v">+1</span><span class="cm-k">Monthly 1:1 check-in</span></div>
+      <div class="cm"><span class="cm-v">$4,500</span><span class="cm-k">Annual rate — save $1,464</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CORPORATE -->
+<section class="corp" id="corporate">
+  <div class="wrap">
+    <div class="corp-grid">
+      <div>
+        <p class="eyebrow reveal">For Organizations</p>
+        <h2 class="title reveal">The workplace layer<br><em>nobody else is building.</em></h2>
+        <p class="lede reveal" style="margin-bottom:0;">The ADA requires employers to accommodate employees with hearing loss. Most HR departments have no framework, no training, and no consultant who has lived it. Korey builds it from the inside.</p>
+        <div class="corp-list reveal">
+          <div class="corp-li"><span>→</span><span>ADA accommodation framework design for HR teams</span></div>
+          <div class="corp-li"><span>→</span><span>Manager training — supporting employees with hearing loss</span></div>
+          <div class="corp-li"><span>→</span><span>Employee workshops — navigating hearing loss at work</span></div>
+          <div class="corp-li"><span>→</span><span>Keynote speaking — disability inclusion, lived experience</span></div>
+          <div class="corp-li"><span>→</span><span>Annual retainer — ongoing accessibility consulting</span></div>
+        </div>
+      </div>
+      <div class="corp-card reveal">
+        <p class="cc-k">Corporate Engagements</p>
+        <div class="cc-row"><span class="cc-l">Workshop / training day</span><span class="cc-v">$2,500–$5,000</span></div>
+        <div class="cc-row"><span class="cc-l">Keynote speaking</span><span class="cc-v">$3,500–$10,000</span></div>
+        <div class="cc-row"><span class="cc-l">ADA framework project</span><span class="cc-v">$5,000–$25,000</span></div>
+        <div class="cc-row"><span class="cc-l">Annual HR retainer</span><span class="cc-v">$15,000–$50,000</span></div>
+        <a href="https://cal.com/quantumsparkcreative/30-min-audit" target="_blank" rel="noopener" class="btn btn-amber" style="width:100%;margin-top:22px;">Inquire About Corporate →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE -->
+<section id="free">
+  <div class="wrap">
+    <p class="eyebrow reveal">Start Here — It's Free</p>
+    <h2 class="title reveal">"The thing your<br><em>audiologist won't tell you."</em></h2>
+    <p class="lede reveal">Free content built from 30 years of lived experience. No clinical jargon. No sales pitch. Just the truth nobody else is saying.</p>
+    <div class="free-grid">
+      <div class="free-card reveal">
+        <span class="fr-ico">🎬</span>
+        <div class="fr-t">YouTube — Weekly Videos</div>
+        <p class="fr-b">The emotional side of hearing loss. The shame. The hiding. What changes when you stop pretending.</p>
+        <a class="fr-a" href="https://youtube.com/@QuantumSparkHQ" target="_blank" rel="noopener">Watch Free →</a>
+      </div>
+      <div class="free-card reveal">
+        <span class="fr-ico">📧</span>
+        <div class="fr-t">Newsletter — Weekly Insight</div>
+        <p class="fr-b">One insight per week from inside 30 years of lived hearing loss. The conversation nobody is having.</p>
+        <a class="fr-a" href="https://youtube.com/@QuantumSparkHQ" target="_blank" rel="noopener">Subscribe Free →</a>
+      </div>
+      <div class="free-card reveal">
+        <span class="fr-ico">🎙️</span>
+        <div class="fr-t">Podcast — Real Conversations</div>
+        <p class="fr-b">Korey with people who have lived hearing loss — teens, adults, parents, professionals. Unfiltered.</p>
+        <a class="fr-a" href="https://youtube.com/@QuantumSparkHQ" target="_blank" rel="noopener">Listen Free →</a>
+      </div>
+      <div class="free-card reveal">
+        <span class="fr-ico">📱</span>
+        <div class="fr-t">The Hearing Life App</div>
+        <p class="fr-b">Free hearing journal, Hearing Score™ tracker, Sound Gym training games, and education library.</p>
+        <a class="fr-a" href="#" onclick="return false;">Coming Soon →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<div class="gx">
+  <div class="wrap">
+    <div class="gx-inner reveal">
+      <span class="gx-ico">🛡️</span>
+      <h2>If our first session doesn't<br><em>give you real clarity —</em><br>you pay nothing.</h2>
+      <p>Full refund on your Story Mapping Session if you don't leave with at least one thing that permanently changes how you see your hearing situation. I have never had to honor it. But I mean it — because I only want to work with people I can genuinely help.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="wrap">
+    <div class="final-inner">
+      <h2 class="reveal">Stop waiting.<br><em>You've waited long enough.</em></h2>
+      <p class="reveal">The version of you that is fully present in every room — every conversation, every dinner table, every meeting that matters — is not that far away. It starts with one free call.</p>
+      <a href="https://cal.com/quantumsparkcreative/30-min-audit" target="_blank" rel="noopener" class="btn btn-green reveal" style="font-size:.72rem;padding:19px 38px;min-height:58px;">Book Your Free Discovery Call →</a>
+      <span class="final-foot">Korey Bogle · QuantumSparkCreative · qspaiconsulting.com</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="f-logo">QuantumSparkCreative</span>
+  <div class="f-links">
+    <a href="#story">Story</a>
+    <a href="#offers">Work With Me</a>
+    <a href="#cohort">The Group</a>
+    <a href="#corporate">Corporate</a>
+    <a href="https://youtube.com/@QuantumSparkHQ" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://cal.com/quantumsparkcreative/30-min-audit" target="_blank" rel="noopener">Book a Call</a>
+  </div>
+  <span class="f-copy">© 2026 QuantumSparkCreative · Korey Bogle</span>
+</footer>
+
+<!-- EXIT OVERLAY -->
+<div class="exit-overlay" id="exit-overlay" role="dialog" aria-modal="true" aria-label="Before you go">
+  <div class="exit-sheet">
+    <div class="ex-handle"></div>
+    <h3 class="ex-h">Before you go —<br><em>one free call. No pressure.</em></h3>
+    <p class="ex-p">You don't have to be ready. You just have to be tired of waiting. A 30-minute discovery call is free — and it might be the most useful 30 minutes you spend this week.</p>
+    <a href="https://cal.com/quantumsparkcreative/30-min-audit" target="_blank" rel="noopener" class="ex-go" onclick="dismissExit()">Book My Free Call →</a>
+    <button class="ex-no" onclick="dismissExit()">Maybe another time</button>
+  </div>
+</div>
+
+<script>
+/* ══ SIGNATURE: WAVEFORM that flattens as years increase ══ */
+(function waveform() {
+  const cv = document.getElementById('ww-canvas');
+  const ctx = cv.getContext('2d');
+  const slider = document.getElementById('ww-slider');
+  const yearsEl = document.getElementById('ww-years');
+  const msgEl = document.getElementById('ww-msg');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const MESSAGES = {
+    0:"You just noticed. That took courage — most people look away.",
+    1:"One year. The gap between noticing and doing something is real. I lived it.",
+    2:"Two years. You've found workarounds. Nodding along. Reading lips. Pretending.",
+    3:"Three years. The people closest to you have started to notice.",
+    4:"Four years. You've looked into hearing aids at least once — and talked yourself out of it.",
+    5:"Five years. This is costing more than you're admitting — at work, at home, in yourself.",
+    6:"Six years. Six years of conversations half-heard.",
+    7:"Seven years. That's how long I waited. You are exactly where I was. There is a way out.",
+    8:"Eight years. You've lived with this longer than you ever thought you would.",
+    9:"Nine years. You've almost forgotten what full hearing felt like.",
+    10:"Ten years. A decade of managing and quietly withdrawing. That ends here.",
+    11:"Eleven years. You deserve to stop carrying this alone.",
+    12:"Twelve years. Everything you've missed stops being necessary.",
+    13:"Thirteen years. Your story deserves to be heard.",
+    14:"Fourteen years. Whenever you're ready — I'm here. No judgment.",
+    15:"Fifteen or more. You're still here. That means you're still looking for the way through. Let's find it."
+  };
+
+  let years = 0, t = 0, raf = null;
+
+  function draw() {
+    const W = cv.width, H = cv.height, mid = H/2;
+    ctx.clearRect(0,0,W,H);
+    // amplitude shrinks + signal dims as years grow — what waiting takes away
+    const fade = 1 - (years/15)*0.82;          // 1 → 0.18
+    const amp  = (H*0.32) * fade;
+    const segs = 140;
+    ctx.lineWidth = 2.2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = `rgba(149,184,168,${0.25 + 0.65*fade})`;
+    ctx.beginPath();
+    for (let i=0;i<=segs;i++){
+      const x = (i/segs)*W;
+      const env = Math.sin((i/segs)*Math.PI);   // taper at edges
+      const y = mid
+        + Math.sin(i*0.32 + t)        * amp*0.55*env
+        + Math.sin(i*0.11 + t*0.6)    * amp*0.35*env
+        + Math.sin(i*0.55 + t*1.4)    * amp*0.18*env*fade;
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+    // amber center line emerges as the wave dies — the flatline of waiting
+    ctx.strokeStyle = `rgba(232,197,71,${(1-fade)*0.55})`;
+    ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(0,mid); ctx.lineTo(W,mid); ctx.stroke();
+    if (!reduceMotion) { t += 0.045; raf = requestAnimationFrame(draw); }
+  }
+
+  function update(v){
+    years = parseInt(v,10);
+    yearsEl.textContent = years === 15 ? '15+' : years;
+    yearsEl.style.color = years >= 10 ? 'var(--sage)' : 'var(--amber)';
+    msgEl.style.opacity = 0;
+    setTimeout(()=>{ msgEl.textContent = MESSAGES[years]; msgEl.style.opacity = 1; },160);
+    if (reduceMotion) draw();
+  }
+
+  slider.addEventListener('input', e => update(e.target.value));
+  update(0);
+  if (!reduceMotion) draw(); else draw();
+})();
+
+/* ══ SCROLL REVEALS ══ */
+(function reveals(){
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+/* ══ NAV BORDER ══ */
+window.addEventListener('scroll',()=>{ 
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY>40);
+},{passive:true});
+
+/* ══ SMOOTH ANCHORS ══ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const el=document.querySelector(a.getAttribute('href'));
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+
+/* ══ FULL-CARD TAP TARGETS ══ */
+document.querySelectorAll('.tier[data-href]').forEach(card=>{
+  const href=card.getAttribute('data-href');
+  card.setAttribute('tabindex','0');
+  card.setAttribute('role','link');
+  card.addEventListener('click',e=>{
+    if(e.target.closest('a')) return;            // real links handle themselves
+    window.open(href,'_blank','noopener');
+  });
+  card.addEventListener('keydown',e=>{
+    if(e.key==='Enter') window.open(href,'_blank','noopener');
+  });
+});
+document.querySelectorAll('.who-card').forEach(c=>{
+  c.addEventListener('click',()=>document.getElementById('offers').scrollIntoView({behavior:'smooth'}));
+});
+
+/* ══ EXIT INTENT — engagement-guarded ══ */
+(function exitIntent(){
+  let shown=false,dismissed=false;
+  let _engaged=false,_engTimer=null,_debounce=null,_mobileTimer=null;
+  try{ if(sessionStorage.getItem('exit_dismissed')) dismissed=true; }catch(e){}
+
+  function setEngaged(ms){
+    _engaged=true; clearTimeout(_engTimer);
+    _engTimer=setTimeout(()=>{_engaged=false;}, ms||3000);
+  }
+  function engaged(){
+    if(_engaged) return true;
+    const a=document.activeElement;
+    if(!a) return false;
+    const tag=a.tagName.toLowerCase();
+    if(['input','textarea','select'].includes(tag)) return true;
+    if(a.closest('.tier,.who-card,.free-card,.wave-widget')) return true;
+    return false;
+  }
+  function show(){
+    if(shown||dismissed||engaged()) return;
+    shown=true;
+    document.getElementById('exit-overlay').classList.add('show');
+  }
+
+  // engagement wiring — slider gets the longest locks
+  const slider=document.getElementById('ww-slider');
+  ['mousedown','touchstart'].forEach(ev=>slider.addEventListener(ev,()=>setEngaged(5000),{passive:true}));
+  slider.addEventListener('input',()=>setEngaged(4000),{passive:true});
+  slider.addEventListener('mouseover',()=>setEngaged(2000),{passive:true});
+  document.querySelectorAll('.tier,.who-card,.free-card,.wave-widget').forEach(el=>{
+    el.addEventListener('mouseenter',()=>setEngaged(3000),{passive:true});
+    el.addEventListener('touchstart',()=>setEngaged(3000),{passive:true});
+  });
+  document.addEventListener('focusin',e=>{
+    if(['input','textarea','select'].includes(e.target.tagName.toLowerCase())){
+      setEngaged(6000); clearTimeout(_mobileTimer); _mobileTimer=null;
+    }
+  });
+
+  // desktop: intentional exit only — clientY < -8 + 300ms debounce
+  document.addEventListener('mouseleave',e=>{
+    if(e.clientY>-8||engaged()) return;
+    clearTimeout(_debounce);
+    _debounce=setTimeout(()=>{ if(!engaged()) show(); },300);
+  });
+  document.addEventListener('mouseenter',()=>clearTimeout(_debounce));
+
+  // mobile: 45s after first scroll
+  window.addEventListener('scroll',()=>{
+    if(_mobileTimer||shown||dismissed) return;
+    _mobileTimer=setTimeout(show,45000);
+  },{passive:true,once:true});
+
+  document.getElementById('exit-overlay').addEventListener('click',e=>{
+    if(e.target===e.currentTarget) dismissExit();
+  });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') dismissExit(); });
+})();
+
+function dismissExit(){
+  document.getElementById('exit-overlay').classList.remove('show');
+  try{ sessionStorage.setItem('exit_dismissed','1'); }catch(e){}
+}
+</script>
+</body>
+</html>
